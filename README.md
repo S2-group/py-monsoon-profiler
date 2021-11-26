@@ -21,7 +21,7 @@ $ cd py-monsoon-profiler
 
 You can either use pip or the installer for the next steps
 
-Using pip: `$ Pip install monsoon`
+Using pip: `$ pip install monsoon`
 
 Using the installer: Download the Python installer from http://msoon.github.io/powermonitor/ - unzip the contents and find setup.py.  From there, use the command:
 ‘Python setup.py install’
