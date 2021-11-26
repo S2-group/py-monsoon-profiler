@@ -53,6 +53,8 @@ def main():
     HVPMSerialNo = 12345    # Enter your device's serial number here.
 
 ```
+
+After everything is done, the file can be run using python3 SimpleSamplingExample.py
 ## Contributions
 
 Any feedback, questions, and improvements about the project are very welcome, feel free to create an issue or pull request directly in this GitHub repository.
