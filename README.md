@@ -4,7 +4,7 @@ Python program used to get readings via the Monsoon HV Power Monitor
 *Currently Work-In-Progress*
 
 ## Requirements
-The only requirement for this project is a working Python 3 installation. At the momemnt this has been only tested on MacOS Big Sur 11.5.2 running Python version 3.9.4 .
+The only requirement for this project is a working Python 3 installation. At the moment this has been only tested on MacOS Big Sur 11.5.2 running Python version 3.9.4 .
 
 
 ## Installation instructions
