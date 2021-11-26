@@ -1,7 +1,7 @@
 # py-monsoon-profiler
 Python program used to get readings via the Monsoon HV Power Monitor
 
-Currently Work-In-Progress
+*Currently Work-In-Progress*
 
 ## Requirements
 The only requirement for this project is a working Python 3 installation. At the momemnt this has been only tested on MacOS Big Sur 11.5.2 running Python version 3.9.4 .
@@ -55,6 +55,11 @@ def main():
 ```
 
 After everything is done, the file can be run using `python3 SimpleSamplingExample.py`
+
+## Issues
+
+When getting readings via USB power, the Hvpm delivers 4.7V instead of 5V. This causes devices such as the Raspberry Pi to give a low power warning,
+however doesn't hinder the operation of the device. This issue is still awaiting a fix.
 ## Contributions
 
 Any feedback, questions, and improvements about the project are very welcome, feel free to create an issue or pull request directly in this GitHub repository.
