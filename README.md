@@ -54,7 +54,7 @@ def main():
 
 ```
 
-After everything is done, the file can be run using python3 SimpleSamplingExample.py
+After everything is done, the file can be run using `python3 SimpleSamplingExample.py`
 ## Contributions
 
 Any feedback, questions, and improvements about the project are very welcome, feel free to create an issue or pull request directly in this GitHub repository.
