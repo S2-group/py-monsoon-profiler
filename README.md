@@ -48,11 +48,82 @@ On windows, for any device to be detected by libusb, you will need to install a 
 ## Usage
 Before being able to get readings from the device you need to put it's serial number into the code, this can be found at the bottom of the code in the main function. On the device it can be found at the back.
 
+From main we will call a function `testHVPM(HVPMSerialNo,pmapi.USB_protocol())` which will contain the neccesary code to get readings, it will take two parameters, the Serial Number and USB protocol.
+
+
 ```
 def main():
     HVPMSerialNo = 12345    # Enter your device's serial number here.
+    testHVPM(HVPMSerialNo,pmapi.USB_protocol()) 
 
 ```
+
+Inside the `testHVPM()` function we will begin by defining some variables and setting up the USB.
+
+```
+    HVMON = HVPM.Monsoon()
+    HVMON.setup_usb(serialno,Protocol)
+    HVMON.fillStatusPacket()
+```
+
+Once this is defined we are ready to begin getting readings.
+
+To start we will enable Vout, to send current to the main channel, this is only neccesary if you are working with the main channel and can be skipped if you are not.
+
+`HVMON.setVout(5) # Setting Voltage to 5` 
+
+To enable reading samples we create a variable called HVengine which will be used to enable/disable channels as well as print readings.
+
+`HVengine = sampleEngine.SampleEngine(HVMON)`
+
+To print readings to a csv file we can write: `HVengine.enableCSVOutput("Output.csv")`
+To print readings to the Console we use: `HVengine.ConsoleOutput(True)`
+
+In order to enable/disable channels we use the function `HVengine.enableChannel()` or `HVengine.disableChannel()`
+
+There are 4 channels you can use(Main,USB,Aux,TimeStamp), for Main & USB, you must enable both Current & Voltage.
+
+Enable Main:
+
+```
+    HVengine.enableChannel(sampleEngine.channels.MainCurrent)    
+    HVengine.enableChannel(sampleEngine.channels.MainVoltage)
+```
+
+Enable USB:
+```
+    HVengine.enableChannel(sampleEngine.channels.USBCurrent)            
+    HVengine.enableChannel(sampleEngine.channels.USBVoltage)
+```
+
+**Note that Main is on by default and if you must manually disable it.
+
+In order to get the timestamps for each reading you must enable timestamps 
+```
+HVengine.enableChannel(sampleEngine.channels.timeStamp)
+```
+For USB there is one extra step which is enabling USB Passthrough, it defaults to Auto which can cause errors, so set it to On.
+```
+   HVMON.setUSBPassthroughMode(op.USB_Passthrough.On)
+```
+
+At this stage everything is setup for readings, you need only to begin sampling
+
+To set the amount of samples to be taken you can use create a constant and initialize it to a value, 5000 samples is equivalent to 1 second.
+To set it to an infinite amount use `numSamples=sampleEngine.triggers.SAMPLECOUNT_INFINITE`
+
+You can set triggers for when to start/stop sampling using 
+```
+   HVengine.setStartTrigger(sampleEngine.triggers.GREATER_THAN,0) # Start after reading of 0
+   HVengine.setStopTrigger(sampleEngine.triggers.GREATER_THAN,5) # Stop after reading of 5
+```
+
+To begin sampling you can use: `HVengine.startSampling(numSamples)`
+
+This will run infinitly until trigger conditions have been met.
+
+MORE CONTENT COMING
+
 
 After everything is done, the file can be run using `python3 SimpleSamplingExample.py`
 
