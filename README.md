@@ -46,7 +46,7 @@ On windows, for any device to be detected by libusb, you will need to install a 
 
 
 ## Usage
-Before being able to get readings from the device you need to put it's serial number into the code, this can be found at the bottom of the code in the main function. On the device it can be found at the back.
+Before being able to get readings from the device, it's serial number need to be put into the code, this can be found at the bottom of the code in the main function. On the device it can be found at the back.
 
 From main we will call a function `testHVPM(HVPMSerialNo,pmapi.USB_protocol())` which will contain the neccesary code to get readings, it will take two parameters, the Serial Number and USB protocol.
 
@@ -122,10 +122,37 @@ To begin sampling you can use: `HVengine.startSampling(numSamples)`
 
 This will run infinitly until trigger conditions have been met.
 
-MORE CONTENT COMING
+Now that triggers have been set, we can actually start sampling using:
+
+```
+    HVengine.startSampling(numSamples) 
+    HVengine.disableCSVOutput()
+    HVengine.startSampling(numSamples)
+```
+This will get the samples and automatically save them to the aforementioned CSV file.
+
+When finished you can close the device using `HVMON.closeDevice()`
 
 
-After everything is done, the file can be run using `python3 SimpleSamplingExample.py`
+To get samples periodically we can use the built in function "periodicStartSampling"
+
+```
+HVengine.periodicStartSampling()
+ for i in range(5):
+        #Collect the most recent 100 samples
+        samples = HVengine.periodicCollectSamples(100) 
+        #samples has the same format as returned by getSamples(): [[timestamp], [mainCurrent], [usbCurrent], [auxCurrent], [mainVolts],[usbVolts]]
+        print("iteration " + repr(i) + " samples collected " + repr(len(samples[0])))
+        time.sleep(1) #Represents doing something else for a bit.
+        
+HVengine.periodicStopSampling()
+
+```
+
+
+
+
+After everything is done, the file can be run using `python3 file.py`
 
 ## Issues
 
