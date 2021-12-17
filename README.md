@@ -112,7 +112,7 @@ At this stage everything is setup for readings, you need only to begin sampling
 To set the amount of samples to be taken you can use create a constant and initialize it to a value, 5000 samples is equivalent to 1 second.
 To set it to an infinite amount use `numSamples=sampleEngine.triggers.SAMPLECOUNT_INFINITE`
 
-You can set triggers for when to start/stop sampling using 
+You can set triggers for when to start/stop sampling using:
 ```
    HVengine.setStartTrigger(sampleEngine.triggers.GREATER_THAN,0) # Start after reading of 0
    HVengine.setStopTrigger(sampleEngine.triggers.GREATER_THAN,5) # Stop after reading of 5
@@ -134,7 +134,7 @@ This will get the samples and automatically save them to the aforementioned CSV 
 When finished you can close the device using `HVMON.closeDevice()`
 
 
-To get samples periodically we can use the built in function "periodicStartSampling"
+To get samples periodically we can use the built in function: "periodicStartSampling"
 
 ```
 HVengine.periodicStartSampling()
